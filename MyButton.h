@@ -9,7 +9,7 @@ class MyButton : public QPushButton
 	Q_OBJECT
 
 	public:
-		MyButton()
+		MyButton(const QString &text) : QPushButton(text)
 		{ 
 		 connect(this, SIGNAL(clicked()), this, SLOT(addNewItem()));
 		}
