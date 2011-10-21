@@ -1,9 +1,14 @@
+#include <QtGui>
 #include "MyButton.h"
-
-#include <iostream>
 
 void MyButton::addNewItem() 
 {
-	std::cout << "Inside Add New Item()" << std::endl;
+//	std::cout << "Inside Add New Item()" << std::endl;
+	QDialog *window = new QDialog();
+	QLabel *label = new QLabel("New window");
+	QVBoxLayout *layout = new QVBoxLayout();
+	layout->addWidget(label);
+	window->setLayout(layout);
+	window->show();
 }
 

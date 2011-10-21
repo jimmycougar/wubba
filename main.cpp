@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 //	createItemButton.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 //	QObject::connect(&createItemButton, SIGNAL(clicked()), &MyNewItem(), SLOT(createMyNewItem()));
 
-	MyButton *createButton = new MyButton("My Button");
+	MyButton *createButton = new MyButton("Add an item");
 	createButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
 	QPushButton *quitButton = new QPushButton("Quit");
