@@ -1,8 +1,32 @@
 #include <QtGui>
 
 #include "MyButton.h"
+#include "PokerTable.h"
 
 using namespace std;
+
+PokerTable* init_table()
+{
+	PokerTable * table = new PokerTable();
+
+	QFile inputFile("poker.txt");
+	if (!inputFile.open(QIODevice::ReadOnly))
+	{
+		cout << "Error opening file.\n";
+		return table;
+	}
+
+	QTextStream stream(&inputFile);
+
+	while(!stream.atEnd())
+	{
+		QString date, person, stakes, amount;
+		stream >> date >> person >> stakes >> amount;
+		table->addRow(date, person, stakes, amount);
+	}
+
+	return table;
+}
 
 int main(int argc, char *argv[]) 
 {
@@ -21,8 +45,10 @@ int main(int argc, char *argv[])
 	
 	QHBoxLayout *graphLayout = new QHBoxLayout();
 	graphLayout->addLayout(optionsLayout);
-	QTextEdit *temp = new QTextEdit("This is where a graph will go");
-	graphLayout->addWidget(temp);
+
+	PokerTable * table = init_table();
+	
+	graphLayout->addWidget(table);
 
 //	QPushButton createItemButton("Create New Item");
 //	createItemButton.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
