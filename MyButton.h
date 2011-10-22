@@ -9,14 +9,11 @@ class MyButton : public QPushButton
 	Q_OBJECT
 
 	public:
-		MyButton(const QString &text) : QPushButton(text)
-		{ 
-		 connect(this, SIGNAL(clicked()), this, SLOT(addNewItem()));
-		}
+		MyButton(const QString &text);
 
 	public slots:
 		void addNewItem();
-
+		void quitClicked();
 };
 #endif
 

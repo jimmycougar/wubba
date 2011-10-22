@@ -1,14 +1,21 @@
 #include <QtGui>
+#include <iostream>
+
 #include "MyButton.h"
+#include "PokerInput.h"
+
+MyButton::MyButton(const QString &text) 
+: QPushButton(text) {
+	connect(this, SIGNAL(clicked()), this, SLOT(addNewItem()));
+}
 
 void MyButton::addNewItem() 
 {
-//	std::cout << "Inside Add New Item()" << std::endl;
-	QDialog *window = new QDialog();
-	QLabel *label = new QLabel("New window");
-	QVBoxLayout *layout = new QVBoxLayout();
-	layout->addWidget(label);
-	window->setLayout(layout);
-	window->show();
+	PokerInput *pokerInput = new PokerInput();
+	pokerInput->setModal(true);
+	pokerInput->exec();
 }
 
+void MyButton::quitClicked() {
+	std::cout << "QUIT CLICKED()!\n";
+}
