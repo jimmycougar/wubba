@@ -1,4 +1,5 @@
 #include <QtGui>
+#include <stdlib.h>
 
 #include "MyButton.h"
 #include "PokerTable.h"
@@ -18,12 +19,30 @@ PokerTable* init_table()
 
 	QTextStream stream(&inputFile);
 
+	int total = 0;
+	int kevin = 0;
+	int estelle = 0;
+
 	while(!stream.atEnd())
 	{
-		QString date, person, stakes, amount;
-		stream >> date >> person >> stakes >> amount;
-		table->addRow(date, person, stakes, amount);
+		QString date, person, stakes, amount_str;
+		stream >> date >> person >> stakes >> amount_str;
+		table->AddRow(date, person, stakes, amount_str);
+		int amount = atoi(amount_str.toUtf8());
+		total += amount;
+
+		if(person == QString("Kevin"))
+		{
+			kevin += amount;
+		}
+
+		if(person == QString("Estelle")) 
+		{
+			estelle += amount;
+		}
 	}
+
+	table->SetTotal(QString::number(total),QString::number(kevin),QString::number(estelle));
 
 	return table;
 }
